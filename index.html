@@ -1,0 +1,146 @@
+<!-- 下面是我寫的 -->歡迎光臨我的新媒體期末專題❤️
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文字冒險遊戲</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 600px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #story {
+            margin-bottom: 20px;
+        }
+
+        #options {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .option {
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="story"></div>
+        <div id="options"></div>
+    </div>
+    <script>
+        const storyElement = document.getElementById('story');
+        const optionsElement = document.getElementById('options');
+
+        const story = [
+            {
+                text: '你醒來發現自己身處一個陌生的地方，四周一片黑暗。',
+                options: [
+                    { text: '四處摸牆找到一盞燈', nextIndex: 1 },
+                    { text: '呼喊求助', nextIndex: 2 }
+                ]
+            },
+            {
+                text: '你摸索著找到了一盞燈，點燃發現自己在一個古老黑暗的地下室裡。',
+                options: [
+                    { text: '繼續前進', nextIndex: 3 },
+                    { text: '退回到黑暗中', nextIndex: 4 }
+                ]
+            },
+            {
+                text: '你的呼喊引來了附近的人，他們帶你到安全的地方',
+                options: [
+                    { text: '感謝他們的幫助', nextIndex: 3 }
+                ]
+            },
+            {
+                text: '你繼續前進，走了一段時間，發現了一扇門。',
+                options: [
+                    { text: '打開門', nextIndex: 5 },
+                    { text: '退回到地下室', nextIndex: 4 }
+                ]
+            },
+            {
+                text: '在黑暗中迷失了方向，最終無法找到出口。',
+                options: [
+                    { text: '在荒郊野外求生存', nextIndex: 0 }
+                ]
+            },
+            {
+                text: '打開門，你發現自己來到了一個神秘的花園。',
+                options: [
+                    { text: '探索花園', nextIndex: 6 },
+                    { text: '回到地下室', nextIndex: 4 }
+                ]
+            },
+            {
+                text: '你在花園中發現了一個寶箱，裡面有一份神秘的地圖。',
+                options: [
+                    { text: '繼續探索', nextIndex: 7 },
+                    { text: '拿著地圖離開', nextIndex: 8 }
+                ]
+            },
+            {
+                text: '你在地圖上發現了一個藏寶點，得到了一大筆財富。',
+                options: [
+                    { text: '變成大富翁，過著幸福快樂的日子', nextIndex: 0 }
+                ]
+            },
+            {
+                text: '你在探險中迷失了方向，最終無法找到回家的路。',
+                options: [
+                    { text: '在荒郊野外求生存', nextIndex: 0 }
+                ]
+            }
+        ];
+
+        let currentIndex = 0;
+
+        function updateStory() {
+            const currentStory = story[currentIndex];
+            storyElement.innerText = currentStory.text;
+            optionsElement.innerHTML = '';
+            currentStory.options.forEach((option, index) => {
+                const button = document.createElement('button');
+                button.innerText = option.text;
+                button.addEventListener('click', () => {
+                    currentIndex = option.nextIndex;
+                    updateStory();
+                });
+                optionsElement.appendChild(button);
+            });
+        }
+        updateStory();
+    </script>
+</body>
+</html>
